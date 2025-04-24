@@ -67,6 +67,7 @@
 
     /* 3. Responsive embed container */
     .embed-wrapper {
+      filter: invert(1) hue-rotate(180deg);
       position: relative;
       width: 100%;
       max-width: 800px;
@@ -150,6 +151,10 @@
       const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
       localStorage.setItem('theme', newTheme);
       updateButton();
+
+      //apply dark mode to the calendar embed wrapper
+      const embedWrapper = document.querySelector('.embed-wrapper');
+      embedWrapper.classList.toggle('dark',newTheme === 'dark');
     });
   </script>
 </body>
