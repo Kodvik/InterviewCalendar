@@ -1,1 +1,34 @@
-<h1>testing how it works</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book an Interview</title>
+</head>
+<body>
+  <h1>Interview Booking</h1>
+  <!-- Paste your Google Calendar embed code below -->
+  <iframe src="PASTE_YOUR_EMBED_URL"
+          style="border: 0"
+          width="800" height="600"
+          frameborder="0" scrolling="no">
+  </iframe>
+</body>
+</html>
+
+<!-- Google Calendar Appointment Scheduling begin -->
+<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+<script>
+(function() {
+  var target = document.currentScript;
+  window.addEventListener('load', function() {
+    calendar.schedulingButton.load({
+      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ01o4ypJFknqSrjSkMyPo2I5Rfo0tIuZCsDL9OXugJ2BN4mS8G0KMmQynSe9wlyuc42SlB5713i?gv=true',
+      color: '#7d8386',
+      label: "Schedule a meeting/interview",
+      target,
+    });
+  });
+})();
+</script>
+<!-- end Google Calendar Appointment Scheduling -->
