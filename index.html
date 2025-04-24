@@ -15,31 +15,6 @@
       --button-bg: var(--accent);
       --button-fg: #ffffff;
     }
-    /* Dark-mode overrides */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #121212;
-        --fg: #e1e1e1;
-        --container-bg: #1e1e1e;
-        --button-bg: #4a90e2;
-        --button-fg: #ffffff;
-      }
-    }
-    /* If user explicitly toggles dark, we’ll set a class */
-    .dark {
-      --bg: #121212;
-      --fg: #e1e1e1;
-      --container-bg: #1e1e1e;
-      --button-bg: #4a90e2;
-      --button-fg: #ffffff;
-    }
-    .light {
-      --bg: #ffffff;
-      --fg: #222222;
-      --container-bg: #f5f5f5;
-      --button-bg: var(--accent);
-      --button-fg: #ffffff;
-    }
 
     /* 2. Base styles */
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,18 +58,6 @@
       width: 100%; height: 100%;
       border: none;
     }
-
-    /* 4. Toggle button */
-    .theme-toggle {
-      background: var(--button-bg);
-      color: var(--button-fg);
-      border: none;
-      padding: .5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
   </style>
 </head>
 <body>
@@ -105,10 +68,6 @@
   </header>
 
   <main>
-    <!-- Theme toggle -->
-    <button class="theme-toggle">Toggle Light/Dark</button>
-    <p>note: due to google calendar's functionalities, the dark mode does not work as intended</p>
-
     <!-- Calendar embed -->
     <div class="embed-wrapper">
       <iframe 
@@ -124,40 +83,5 @@
   <footer>
     © 2025 Edgard Melo — <a href="mailto:edgardpmelo@gmail.com">edgardpmelo@gmail.com</a>
   </footer>
-
-  <script>
-    // 1. On load: check localStorage or system preference
-    const html = document.documentElement;
-    const toggle = document.querySelector('.theme-toggle');
-    let theme = localStorage.getItem('theme');
-    if (!theme) {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-    }
-    html.classList.add(theme);
-
-    // 2. Update button label
-    function updateButton() {
-      toggle.textContent = html.classList.contains('dark')
-        ? 'Switch to Light Mode'
-        : 'Switch to Dark Mode';
-    }
-    updateButton();
-
-    // 3. On toggle click: swap themes
-    toggle.addEventListener('click', () => {
-      filter: invert(1) hue-rotate(180deg);
-      html.classList.toggle('dark');
-      html.classList.toggle('light');
-      const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
-      localStorage.setItem('theme', newTheme);
-      updateButton();
-      
-      //apply dark mode to the calendar embed wrapper
-      const embedWrapper = document.querySelector('.embed-wrapper');
-      embedWrapper.classList.toggle('dark',newTheme === 'dark');
-    });
-  </script>
 </body>
 </html>
