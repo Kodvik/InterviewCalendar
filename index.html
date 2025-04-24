@@ -8,18 +8,18 @@
   <style>
     /* 1. Color palettes via CSS variables */
     :root {
-      --bg: #ffffff;
-      --fg: #222222;
-      --accent: #007bff;
-      --container-bg: #f5f5f5;
-      --button-bg: var(--accent);
-      --button-fg: #ffffff;
+      --bg-gradient: linear-gradient(to bottom right, #ffffff, #add8e6, #dda0dd); /* White, Light Blue, Purple */
+      --fg: #222222; /* Foreground color */
+      --accent: #007bff; /* Accent color */
+      --container-bg: rgba(255, 255, 255, 0.9); /* Slightly transparent white for containers */
+      --button-bg: var(--accent); /* Button background */
+      --button-fg: #ffffff; /* Button foreground (text color) */
     }
 
     /* 2. Base styles */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--bg);
+      background: var(--bg-gradient);
       color: var(--fg);
       font-family: sans-serif;
       display: flex;
@@ -30,6 +30,9 @@
       background: var(--container-bg);
       text-align: center;
       padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     header h1 { margin-bottom: .25rem; }
     main {
