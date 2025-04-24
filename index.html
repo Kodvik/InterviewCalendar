@@ -67,7 +67,6 @@
 
     /* 3. Responsive embed container */
     .embed-wrapper {
-      filter: invert(1) hue-rotate(180deg);
       position: relative;
       width: 100%;
       max-width: 800px;
@@ -123,7 +122,7 @@
   </main>
 
   <footer>
-    © 2025 Edgard Memlo — <a href="mailto:edgardpmelo@gmail.com">edgardpmelo@gmail.com</a>
+    © 2025 Edgard Melo — <a href="mailto:edgardpmelo@gmail.com">edgardpmelo@gmail.com</a>
   </footer>
 
   <script>
@@ -148,12 +147,13 @@
 
     // 3. On toggle click: swap themes
     toggle.addEventListener('click', () => {
+      filter: invert(1) hue-rotate(180deg);
       html.classList.toggle('dark');
       html.classList.toggle('light');
       const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
       localStorage.setItem('theme', newTheme);
       updateButton();
-
+      
       //apply dark mode to the calendar embed wrapper
       const embedWrapper = document.querySelector('.embed-wrapper');
       embedWrapper.classList.toggle('dark',newTheme === 'dark');
