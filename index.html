@@ -3,32 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <title>Book an Interview</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header, footer {
+      background: #f5f5f5;
+      text-align: center;
+      padding: 1rem;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;            /* center the content vertically */ :contentReference[oaicite:11]{index=11}
+      padding: 2rem;
+    }
+    .embed-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 800px;                /* constrain width for readability */ :contentReference[oaicite:12]{index=12}
+      padding-top: 75%;                /* 4:3 aspect ratio */ :contentReference[oaicite:13]{index=13}
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .embed-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .cta-button {
+      display: inline-block;
+      background: #007bff;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Interview Booking</h1>
-  <!-- Paste your Google Calendar embed code below -->
-  <iframe src="PASTE_YOUR_EMBED_URL"
-          style="border: 0"
-          width="800" height="600"
-          frameborder="0" scrolling="no">
-  </iframe>
+  <header>
+    <h1>Your Name</h1>
+    <p>Schedule your interview below</p>
+  </header>
+  <main>
+    <div>
+      <a href="#calendar" class="cta-button">Book Your Interview</a> <!-- top CTA -->
+      <div id="calendar" class="embed-wrapper">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=your_calendar_id&mode=AGENDA"
+          scrolling="no"
+        ></iframe>
+      </div>
+      <a href="#calendar" class="cta-button">Book Your Interview</a> <!-- bottom CTA -->
+    </div>
+  </main>
+  <footer>
+    © 2025 Your Name — <a href="mailto:you@example.com">you@example.com</a>
+  </footer>
+
+  <!-- Google Scheduling Button (optional) -->
+  <link
+    href="https://calendar.google.com/calendar/scheduling-button-script.css"
+    rel="stylesheet"
+  >
+  <script
+    src="https://calendar.google.com/calendar/scheduling-button-script.js"
+    async
+  ></script>
+  <script>
+    window.addEventListener('load', function() {
+      calendar.schedulingButton.load({
+        url: 'https://calendar.google.com/calendar/appointments/schedules/…?gv=true',
+        color: '#007bff',
+        label: 'Schedule a meeting/interview',
+        target: document.body
+      });
+    });
+  </script>
 </body>
 </html>
-
-<!-- Google Calendar Appointment Scheduling begin -->
-<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-<script>
-(function() {
-  var target = document.currentScript;
-  window.addEventListener('load', function() {
-    calendar.schedulingButton.load({
-      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ01o4ypJFknqSrjSkMyPo2I5Rfo0tIuZCsDL9OXugJ2BN4mS8G0KMmQynSe9wlyuc42SlB5713i?gv=true',
-      color: '#7d8386',
-      label: "Schedule a meeting/interview",
-      target,
-    });
-  });
-})();
-</script>
-<!-- end Google Calendar Appointment Scheduling -->
