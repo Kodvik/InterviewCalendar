@@ -2,36 +2,80 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Book an Interview</title>
+
   <style>
+    /* 1. Color palettes via CSS variables */
+    :root {
+      --bg: #ffffff;
+      --fg: #222222;
+      --accent: #007bff;
+      --container-bg: #f5f5f5;
+      --button-bg: var(--accent);
+      --button-fg: #ffffff;
+    }
+    /* Dark-mode overrides */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --fg: #e1e1e1;
+        --container-bg: #1e1e1e;
+        --button-bg: #4a90e2;
+        --button-fg: #ffffff;
+      }
+    }
+    /* If user explicitly toggles dark, we’ll set a class */
+    .dark {
+      --bg: #121212;
+      --fg: #e1e1e1;
+      --container-bg: #1e1e1e;
+      --button-bg: #4a90e2;
+      --button-fg: #ffffff;
+    }
+    .light {
+      --bg: #ffffff;
+      --fg: #222222;
+      --container-bg: #f5f5f5;
+      --button-bg: var(--accent);
+      --button-fg: #ffffff;
+    }
+
+    /* 2. Base styles */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
+      background: var(--bg);
+      color: var(--fg);
       font-family: sans-serif;
-      margin: 0;
-      padding: 0;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
     header, footer {
-      background: #f5f5f5;
+      background: var(--container-bg);
       text-align: center;
       padding: 1rem;
     }
+    header h1 { margin-bottom: .25rem; }
     main {
       flex: 1;
       display: flex;
-      justify-content: center;
-      align-items: center;            /* center the content vertically */ :contentReference[oaicite:11]{index=11}
+      flex-direction: column;
+      align-items: center;
       padding: 2rem;
     }
+
+    /* 3. Responsive embed container */
     .embed-wrapper {
       position: relative;
       width: 100%;
-      max-width: 800px;                /* constrain width for readability */ :contentReference[oaicite:12]{index=12}
-      padding-top: 75%;                /* 4:3 aspect ratio */ :contentReference[oaicite:13]{index=13}
+      max-width: 800px;
+      padding-top: 75%;       /* 4:3 aspect ratio */
+      background: var(--container-bg);
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       border-radius: 8px;
       overflow: hidden;
+      margin: 1rem 0;
     }
     .embed-wrapper iframe {
       position: absolute;
@@ -39,15 +83,17 @@
       width: 100%; height: 100%;
       border: none;
     }
-    .cta-button {
-      display: inline-block;
-      background: #007bff;
-      color: #fff;
-      text-decoration: none;
-      padding: 0.75rem 1.5rem;
-      margin-bottom: 1rem;
+
+    /* 4. Toggle button */
+    .theme-toggle {
+      background: var(--button-bg);
+      color: var(--button-fg);
+      border: none;
+      padding: .5rem 1rem;
       border-radius: 4px;
+      cursor: pointer;
       font-size: 1rem;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
@@ -56,39 +102,51 @@
     <h1>Your Name</h1>
     <p>Schedule your interview below</p>
   </header>
+
   <main>
-    <div>
-      <a href="#calendar" class="cta-button">Book Your Interview</a> <!-- top CTA -->
-      <div id="calendar" class="embed-wrapper">
-        <iframe
-          src="https://calendar.google.com/calendar/embed?src=your_calendar_id&mode=AGENDA"
-          scrolling="no"
-        ></iframe>
-      </div>
-      <a href="#calendar" class="cta-button">Book Your Interview</a> <!-- bottom CTA -->
+    <!-- Theme toggle -->
+    <button class="theme-toggle">Toggle Light/Dark</button>
+
+    <!-- Calendar embed -->
+    <div class="embed-wrapper">
+      <iframe
+        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ01o4ypJFknqSrjSkMyPo2I5Rfo0tIuZCsDL9OXugJ2BN4mS8G0KMmQynSe9wlyuc42SlB5713i?gv=true"
+        scrolling="no">
+      </iframe>
     </div>
   </main>
+
   <footer>
-    © 2025 Your Name — <a href="mailto:you@example.com">you@example.com</a>
+    © 2025 Edgard Memlo — <a href="mailto:edgardpmelo@gmail.com">edgardpmelo@gmail.com</a>
   </footer>
 
-  <!-- Google Scheduling Button (optional) -->
-  <link
-    href="https://calendar.google.com/calendar/scheduling-button-script.css"
-    rel="stylesheet"
-  >
-  <script
-    src="https://calendar.google.com/calendar/scheduling-button-script.js"
-    async
-  ></script>
   <script>
-    window.addEventListener('load', function() {
-      calendar.schedulingButton.load({
-        url: 'https://calendar.google.com/calendar/appointments/schedules/…?gv=true',
-        color: '#007bff',
-        label: 'Schedule a meeting/interview',
-        target: document.body
-      });
+    // 1. On load: check localStorage or system preference
+    const html = document.documentElement;
+    const toggle = document.querySelector('.theme-toggle');
+    let theme = localStorage.getItem('theme');
+    if (!theme) {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    }
+    html.classList.add(theme);
+
+    // 2. Update button label
+    function updateButton() {
+      toggle.textContent = html.classList.contains('dark')
+        ? 'Switch to Light Mode'
+        : 'Switch to Dark Mode';
+    }
+    updateButton();
+
+    // 3. On toggle click: swap themes
+    toggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      html.classList.toggle('light');
+      const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+      updateButton();
     });
   </script>
 </body>
