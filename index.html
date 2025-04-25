@@ -36,17 +36,18 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       color: #ffffff;
     }
+    header h1, header h2 {
+      color: black; /* Updated text color */
+    }
     header h1 {
       font-size: 2rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
-      font-color: black;
     }
     header h2 {
       font-size: 1.2rem;
       margin-bottom: 1rem;
       font-weight: lighter;
-      font-color: black;
     }
     main {
       flex: 1;
@@ -61,12 +62,13 @@
       position: relative;
       width: 100%;
       max-width: 800px;
+      max-height: 600px; /* Limit container height */
       padding-top: 75%;       /* 4:3 aspect ratio */
       background: var(--container-bg);
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       border-radius: 8px;
       overflow: hidden;
-      margin: 1rem 0;
+      margin: auto; /* Center the container */
     }
     .embed-wrapper iframe {
       position: absolute;
