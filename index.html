@@ -8,7 +8,7 @@
   <style>
     /* 1. Color palettes via CSS variables */
     :root {
-      --bg-gradient: linear-gradient(to bottom right, #ffffff, #add8e6); /* White to Light Blue */
+      --bg-color: #ffffff; /* Solid white background */
       --header-bg: linear-gradient(to right, rgba(173, 216, 230, 0.8), rgba(221, 160, 221, 0.8)); /* Light Blue to Purple */
       --fg: #222222; /* Foreground color */
       --accent: #007bff; /* Accent color */
@@ -20,7 +20,7 @@
     /* 2. Base styles */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--bg-gradient);
+      background: var(--bg-color); /* Changed from gradient to solid color */
       color: var(--fg);
       font-family: 'Arial', sans-serif;
       display: flex;
@@ -62,7 +62,7 @@
       position: relative;
       width: 100%;
       max-width: 800px;
-      max-height: 200px; /* Limit container height */
+      max-height: 600px; /* Limit container height */
       padding-top: 75%;       /* 4:3 aspect ratio */
       background: var(--container-bg);
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
