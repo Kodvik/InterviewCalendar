@@ -1,104 +1,134 @@
+<!-- #region README -->
+<!-- **********************************************         READ ME          ********************************************** -->
+<!-- Code by: Edgard Melo (edgardpmelo@hotmail.com) -->
+<!-- date: 2025-04-24 (YYYY-MM-DD) -->
+<!-- version: 1.0 -->
+<!-- ********************************************************************************************************************** -->
+<!-- #endregion -->
+
+<!-- #region Patch Notes -->
+<!-- ********************************************         Patch Notes          ******************************************** -->
+<!-- Version 1.0: -->
+<!-- patch notes: -->
+<!-- - code reorganized to fit the prepared template I've made to make it easier to maintain --> 
+<!-- current development status: -->
+<!-- - Deployed -->
+<!-- next steps: -->
+<!-- - Improvement in the graphicals since currently the website is too bare -->
+<!-- ********************************************************************************************************************** -->
+<!-- #endregion -->
+
+<!-- #region Configuration (Head) -->
+<!-- *******************************************     Configuration section    ******************************************* -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Book an Interview</title>
+    <head>
+        <style>
+            /* 1. Color palettes via CSS variables */
+            :root {
+            --bg-image: url('Background.png'); /* Path to your background image */
+            --header-bg: linear-gradient(to right, rgba(173, 216, 230, 0.8), rgba(221, 160, 221, 0.8)); /* Light Blue to Purple */
+            --fg: #222222; /* Foreground color */
+            --accent: #007bff; /* Accent color */
+            --container-bg: rgba(255, 255, 255, 0.7); /* Slightly transparent white for containers */
+            --button-bg: var(--accent); /* Button background */
+            --button-fg: #ffffff; /* Button foreground (text color) */
+            }
 
-  <style>
-    /* 1. Color palettes via CSS variables */
-    :root {
-      --bg-image: url('Background.png'); /* Path to your background image */
-      --header-bg: linear-gradient(to right, rgba(173, 216, 230, 0.8), rgba(221, 160, 221, 0.8)); /* Light Blue to Purple */
-      --fg: #222222; /* Foreground color */
-      --accent: #007bff; /* Accent color */
-      --container-bg: rgba(255, 255, 255, 0.7); /* Slightly transparent white for containers */
-      --button-bg: var(--accent); /* Button background */
-      --button-fg: #ffffff; /* Button foreground (text color) */
-    }
+            /* 2. Base styles */
+            * { box-sizing: border-box; margin: 0; padding: 0; }
+            body {
+            background: var(--bg-image) no-repeat center center fixed; /* Use the image as the background */
+            background-size: cover; /* Ensure the image covers the entire background */
+            color: var(--fg);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            }
+            header {
+            background: var(--header-bg);
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: 8px;
+            margin: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: #ffffff;
+            }
+            header h1, header h2, header p {
+            color: black; /* Updated text color */
+            }
+            header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            }
+            header h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: lighter;
+            }
 
-    /* 2. Base styles */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg-image) no-repeat center center fixed; /* Use the image as the background */
-      background-size: cover; /* Ensure the image covers the entire background */
-      color: var(--fg);
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-    }
-    header {
-      background: var(--header-bg);
-      text-align: center;
-      padding: 2rem 1rem;
-      border-radius: 8px;
-      margin: 1rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      color: #ffffff;
-    }
-    header h1, header h2, header p {
-      color: black; /* Updated text color */
-    }
-    header h1 {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-    header h2 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      font-weight: lighter;
-    }
+            main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            }
 
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1.5rem;
-    }
+            /* 3. Responsive embed container */
+            .embed-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            padding-top: 75%; /* 4:3 aspect ratio */
+            background: var(--container-bg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: auto; /* Center the container */
+            }
+            .embed-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+            }
 
-    /* 3. Responsive embed container */
-    .embed-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      padding-top: 75%; /* 4:3 aspect ratio */
-      background: var(--container-bg);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      overflow: hidden;
-      margin: auto; /* Center the container */
-    }
-    .embed-wrapper iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
-    }
+            /* Add styles for sections */
+            .section {
+            background: var(--container-bg); /* Slightly transparent white background */
+            padding: 1.5rem;
+            margin: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+            width: 90%; /* Make the sections responsive */
+            max-width: 800px; /* Limit the width for larger screens */
+            }
 
-    /* Add styles for sections */
-    .section {
-      background: var(--container-bg); /* Slightly transparent white background */
-      padding: 1.5rem;
-      margin: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-      width: 90%; /* Make the sections responsive */
-      max-width: 800px; /* Limit the width for larger screens */
-    }
+            footer {
+            background: var(--container-bg);
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    </head>
+<!-- #endregion -->
 
-    footer {
-      background: var(--container-bg);
-      text-align: center;
-      padding: 1rem;
-      border-radius: 8px;
-      margin: 1rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-  </style>
-</head>
+<!-- #region Import Section -->
+<!-- *******************************************         Import section        ******************************************* -->
+<!-- Link to external CSS files, JavaScript files, etc. -->
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js"></script>
+<!-- ********************************************************************************************************************** -->
+<!-- #endregion -->
+
+<!-- #region Header Section -->
+<!-- *******************************************         Header section        ******************************************* -->
 <body>
   <header>
     <h1>Edgard Melo</h1>
@@ -106,57 +136,69 @@
     <p>Schedule your interview below with me</p>
   </header>
 
-  <main>
-  
-    <!-- About Me Section -->
-    <div class="section">
-      <h2>About Me</h2>
-      <p>
-        I am a professional looking for an entry position in: Computer Engineering, Cybersecurity, DevOps, or Scripting/Automation/QA.<br>
-        Passionate about solving complex problems and delivering secure, efficient solutions.<br>
-        <br>
-        You can find my CV and contacts below:<br>
-        <br>
-        LinkedIn: <a href="https://linkedin.com/in/edgard-melo/">linkedin.com/in/edgard-melo</a><br>
-        GitHub: <a href="https://github.com/Kodvik">github.com/Kodvik</a><br>
-        Contact: +55 31 99307 7844 <a href="https://wa.me/+5531993077844">(WhatsApp)</a> || <a href="mailto:edgardpmelo@gmail.com">edgardpmelo@gmail.com</a>
-      </p>
-    </div>
-    
-    <!-- Google Calendar Appointment Scheduling begin -->
-    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-    <script>
-    (function() {
-      var target = document.currentScript;
-      window.addEventListener('load', function() {
-        calendar.schedulingButton.load({
-          url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ01o4ypJFknqSrjSkMyPo2I5Rfo0tIuZCsDL9OXugJ2BN4mS8G0KMmQynSe9wlyuc42SlB5713i?gv=true',
-          color: '#616161',
-          label: "Schedule a meeting/interview",
-          target,
-        });
-      });
-    })();
-    </script>
-    <!-- end Google Calendar Appointment Scheduling -->
-    
-    <!-- CV Visualization -->
-    <div class="section">
-      <h2>CV Visualization</h2>
-      <p>
-        <a href="EdgardCV.pdf" target="_blank" style="color: var(--accent);">Download My CV (PDF)</a>
-      </p>
-      <iframe 
-        src="EdgardCV.pdf" 
-        width="100%" 
-        height="400" 
-        style="border: none;">
-      </iframe>
-    </div>
+<!-- ********************************************************************************************************************** -->
+<!-- #endregion -->
 
-  <footer>
-    © 2025 Edgard Melo — <a href="mailto:edgardpmelo@gmail.com">edgardpmelo@gmail.com</a>
-  </footer>
-</body>
+<!-- #region Main Content Section -->
+<!-- *******************************************         Main Content section        ******************************************* -->
+    <main>
+    
+        <!-- About Me Section -->
+        <div class="section">
+        <h2>About Me</h2>
+        <p>
+            I am a professional looking for an entry position in: Computer Engineering, Cybersecurity, DevOps, or Scripting/Automation/QA.<br>
+            Passionate about solving complex problems and delivering secure, efficient solutions.<br>
+            <br>
+            You can find my CV and contacts below:<br>
+            <br>
+            LinkedIn: <a href="https://linkedin.com/in/edgard-melo/">linkedin.com/in/edgard-melo</a><br>
+            GitHub: <a href="https://github.com/Kodvik">github.com/Kodvik</a><br>
+            Contact: +55 31 99307 7844 <a href="https://wa.me/+5531993077844">(WhatsApp)</a> || <a href="mailto:edgardpmelo@gmail.com">edgardpmelo@gmail.com</a>
+        </p>
+        </div>
+        
+        <!-- Google Calendar Appointment Scheduling begin -->
+        <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+        <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+        <script>
+        (function() {
+        var target = document.currentScript;
+        window.addEventListener('load', function() {
+            calendar.schedulingButton.load({
+            url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ01o4ypJFknqSrjSkMyPo2I5Rfo0tIuZCsDL9OXugJ2BN4mS8G0KMmQynSe9wlyuc42SlB5713i?gv=true',
+            color: '#616161',
+            label: "Schedule a meeting/interview",
+            target,
+            });
+        });
+        })();
+        </script>
+        <!-- end Google Calendar Appointment Scheduling -->
+        
+        <!-- CV Visualization -->
+        <div class="section">
+        <h2>CV Visualization</h2>
+        <p>
+            <a href="EdgardCV.pdf" target="_blank" style="color: var(--accent);">Download My CV (PDF)</a>
+        </p>
+        <iframe 
+            src="EdgardCV.pdf" 
+            width="100%" 
+            height="400" 
+            style="border: none;">
+        </iframe>
+        </div>
+    </main>
+<!-- ********************************************************************************************************************** -->
+<!-- #endregion -->
+
+<!-- #region Footer Section -->
+<!-- ********************************************         Footer section          ******************************************** -->
+        <footer>
+            © 2025 Edgard Melo — <a href="mailto:edgardpmelo@gmail.com">edgardpmelo@gmail.com</a>
+        </footer>
+    </body>
 </html>
+<!-- ********************************************************************************************************************** -->
+<!-- #endregion -->
