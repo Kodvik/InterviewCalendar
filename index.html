@@ -58,6 +58,25 @@
       padding: 1.5rem;
     }
 
+    /* 3. Responsive embed container */
+    .embed-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      padding-top: 75%; /* 4:3 aspect ratio */
+      background: var(--container-bg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: auto; /* Center the container */
+    }
+    .embed-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
     /* Add styles for sections */
     .section {
       background: var(--container-bg); /* Slightly transparent white background */
@@ -95,7 +114,7 @@
         Passionate about solving complex problems and delivering secure, efficient solutions.<br>
         <br>
         You can find my CV and contacts below:<br>
-  
+        <br>
         LinkedIn: <a href="https://linkedin.com/in/edgard-melo/">linkedin.com/in/edgard-melo</a><br>
         GitHub: <a href="https://github.com/Kodvik">github.com/Kodvik</a><br>
         Contact: +55 31 99307 7844 <a href="https://wa.me/+5531993077844">(WhatsApp)</a> || <a href="mailto:edgardpmelo@gmail.com">edgardpmelo@gmail.com</a>
